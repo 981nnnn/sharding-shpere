@@ -3,10 +3,12 @@ package com.xb.shardingspheredemo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xb.shardingspheredemo.entity.Course;
 import com.xb.shardingspheredemo.mapper.CourseMapper;
+import org.apache.shardingsphere.api.hint.HintManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
@@ -55,5 +57,24 @@ class ShardingSphereDemoApplicationTests {
     queryWrapper.eq("user_id","1002");
     final List<Course> courses = courseMapper.selectList(queryWrapper);
     courses.forEach(System.out::println);
+  }
+  @Test
+  void queryCourseComplex(){
+    final QueryWrapper<Course> queryWrapper = new QueryWrapper<>();
+    queryWrapper.in("cid", Arrays.asList(740310060466438144L,740310060613238785L));
+    queryWrapper.eq("user_id",1001L);
+    final List<Course> courses = courseMapper.selectList(queryWrapper);
+    courses.forEach(System.out::println);
+  }
+
+  @Test
+  void queryCourseHint(){
+    final QueryWrapper<Course> queryWrapper = new QueryWrapper<>();
+    // hint 不支持union，多层子查询，函数计算
+    final HintManager hintManager = HintManager.getInstance();
+    hintManager.addTableShardingValue("course",2);
+    final List<Course> courses = courseMapper.selectList(queryWrapper);
+    courses.forEach(System.out::println);
+    hintManager.close();
   }
 }
