@@ -126,4 +126,9 @@ class ShardingSphereDemoApplicationTests {
     final List<User> users = userMapper.queryUserStatus();
     users.forEach(System.out::println);
   }
+
+  @Test
+  void gitTest(){
+    System.out.println("1");
+  }
 }
