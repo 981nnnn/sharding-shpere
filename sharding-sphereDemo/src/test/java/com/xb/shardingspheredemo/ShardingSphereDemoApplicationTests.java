@@ -129,6 +129,7 @@ class ShardingSphereDemoApplicationTests {
 
   @Test
   void gitTest(){
+    System.out.println("2");
     System.out.println("1");
   }
 }
