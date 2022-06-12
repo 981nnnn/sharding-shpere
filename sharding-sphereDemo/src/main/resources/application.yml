@@ -1,0 +1,3 @@
+logging:
+  level:
+    com.xb.shardingspheredemo.mapper: debug

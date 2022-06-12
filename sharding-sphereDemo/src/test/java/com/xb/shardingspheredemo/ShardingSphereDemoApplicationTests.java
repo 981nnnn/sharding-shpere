@@ -128,23 +128,28 @@ class ShardingSphereDemoApplicationTests {
   }
 
   @Test
-  void gitTest(){
-    System.out.println("2");
-    System.out.println("1");
+   void masterSlaveDict(){
+    for (int i = 0;i  < 10; i++) {
+      final Dict dict = new Dict();
+      dict.setUstatus(""+(i%2));
+      dict.setUvalue("normal");
+      dictMapper.insert(dict);
+    }
   }
 
-  void gitTest01(){
-    System.out.println("1");
-    System.out.println("2");
-  }
-  
-  void gitTest02(){
-    System.out.println("1");
-    System.out.println("2");
+  @Test
+   void queryMasterSlaveDict(){
+      final QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
+      dictMapper.selectList(queryWrapper).forEach(System.out::println);
   }
 
-  void gitTest03(){
-    System.out.println("1");
-    System.out.println("2");
+  @Test
+  void updateMasterSlaveDict(){
+    final QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
+    queryWrapper.eq("dict_id",742787454561419265L);
+    final Dict dict = new Dict();
+    dict.setUvalue("unNormal");
+    dictMapper.update(dict,queryWrapper);
   }
+
 }
