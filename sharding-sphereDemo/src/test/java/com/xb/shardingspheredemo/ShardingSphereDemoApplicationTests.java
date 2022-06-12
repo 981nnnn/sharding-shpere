@@ -3,9 +3,11 @@ package com.xb.shardingspheredemo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.xb.shardingspheredemo.entity.Course;
 import com.xb.shardingspheredemo.entity.Dict;
+import com.xb.shardingspheredemo.entity.Order;
 import com.xb.shardingspheredemo.entity.User;
 import com.xb.shardingspheredemo.mapper.CourseMapper;
 import com.xb.shardingspheredemo.mapper.DictMapper;
+import com.xb.shardingspheredemo.mapper.OrdersMapper;
 import com.xb.shardingspheredemo.mapper.UserMapper;
 import org.apache.shardingsphere.api.hint.HintManager;
 import org.junit.jupiter.api.Test;
@@ -23,9 +25,10 @@ class ShardingSphereDemoApplicationTests {
   private CourseMapper courseMapper;
   @Autowired
   private DictMapper dictMapper;
-
   @Autowired
   private UserMapper userMapper;
+  @Autowired
+  private OrdersMapper ordersMapper;
 
   @Test
   void addCourse() {
@@ -150,6 +153,23 @@ class ShardingSphereDemoApplicationTests {
     final Dict dict = new Dict();
     dict.setUvalue("unNormal");
     dictMapper.update(dict,queryWrapper);
+  }
+
+  @Test
+  void insertOrder(){
+    for (int i = 0; i < 10; i++) {
+      final Order orders = new Order();
+      orders.setOrderType(i);
+      orders.setCustomerId(i);
+      orders.setAmount(Double.valueOf(i+""));
+      ordersMapper.insert(orders);
+    }
+  }
+  @Test
+  void findOrder(){
+    final QueryWrapper queryWrapper = new QueryWrapper();
+    queryWrapper.eq("customer_id",2);
+    ordersMapper.selectList(queryWrapper).forEach(System.out::println);
   }
 
 }
