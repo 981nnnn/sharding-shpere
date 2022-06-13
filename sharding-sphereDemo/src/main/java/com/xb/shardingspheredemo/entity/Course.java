@@ -1,8 +1,11 @@
 package com.xb.shardingspheredemo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
 /**
  * @Author xb
  **/
+@TableName("t_course")
 public class Course {
   private Long cid;
   private String cname;

@@ -117,7 +117,16 @@ class ShardingSphereDemoApplicationTests {
       user.setUage(i);
       userMapper.insert(user);
     }
+  }
 
+  @Test
+  void addDict_1(){
+    for (int i = 0; i < 10; i++) {
+      final Dict dict = new Dict();
+      dict.setUvalue("normal");
+      dict.setUstatus("1");
+      dictMapper.insert(dict);
+    }
   }
   @Test
   void addUser(){
