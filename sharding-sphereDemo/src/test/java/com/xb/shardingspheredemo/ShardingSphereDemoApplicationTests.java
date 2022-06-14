@@ -96,6 +96,14 @@ class ShardingSphereDemoApplicationTests {
   }
 
   @Test
+  void findDict(){
+    final QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
+    dictMapper.selectList(queryWrapper).forEach(System.out::println);
+  }
+
+
+
+  @Test
   public void addDict() {
 
     final Dict dict = new Dict();
@@ -125,6 +133,7 @@ class ShardingSphereDemoApplicationTests {
       final Dict dict = new Dict();
       dict.setUvalue("normal");
       dict.setUstatus("1");
+      dict.setDictId(Long.valueOf(i+""+100));
       dictMapper.insert(dict);
     }
   }
