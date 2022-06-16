@@ -189,5 +189,9 @@ class ShardingSphereDemoApplicationTests {
     queryWrapper.eq("customer_id",2);
     ordersMapper.selectList(queryWrapper).forEach(System.out::println);
   }
+  @Test
+  public void test(){
+    System.out.println("");
+  }
 
 }
