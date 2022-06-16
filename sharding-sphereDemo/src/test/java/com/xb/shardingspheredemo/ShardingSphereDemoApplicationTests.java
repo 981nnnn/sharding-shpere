@@ -193,8 +193,11 @@ class ShardingSphereDemoApplicationTests {
   public void test(){
     System.out.println("");
     System.out.println("123");
-    System.out.println("455");
     System.out.println("789");
+  }
+  
+  @Test
+  public void test9(){
   }
 
 }
